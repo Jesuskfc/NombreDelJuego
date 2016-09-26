@@ -109,4 +109,16 @@ public static class ExtensionMethods
 			go.transform.localScale = new Vector3 (go.transform.localScale.x * (i_size.x / go.GetSize ().x), go.transform.localScale.y * (i_size.y / go.GetSize ().y), go.transform.localScale.z * (i_size.z / go.GetSize ().z));
 		}
 	}
+
+	public static Texture2D ToGrayscale(this Texture2D i_text)
+	{
+		Texture2D text = new Texture2D (i_text.width, i_text.height);
+		UnityEngine.Color[] pixels = i_text.GetPixels ();
+		UnityEngine.Color[] tempPixels = new UnityEngine.Color[pixels.Length];
+		for (int i = 0; i < pixels.Length; i++)
+			tempPixels [i] = new UnityEngine.Color (pixels [i].grayscale, pixels [i].grayscale, pixels [i].grayscale);
+		text.SetPixels (tempPixels);
+		text.Apply();
+		return text;
+	}
 }
